@@ -1,22 +1,23 @@
 package com.example.myapplication;
 
-import android.content.Context;
+import android.app.LauncherActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.myapplication.databinding.ListItemBinding;
 
 import java.util.List;
 
-public class MyAdapter extends BaseAdapter{
+public class UserAdapter extends BaseAdapter {
     private List<String> data;
     private LayoutInflater inflater;
 
-    public MyAdapter(List<String> data, Context context) {
+    public UserAdapter(List<String> data, LayoutInflater inflater) {
         this.data = data;
-        this.inflater = LayoutInflater.from(context);
+        this.inflater = inflater;
     }
 
     @Override
@@ -38,9 +39,9 @@ public class MyAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = inflater.inflate(R.layout.list_item, parent, false);
         TextView number = view.findViewById(R.id.number);
-        TextView name = view.findViewById(R.id.name);
+        TextView text = view.findViewById(R.id.name);
         number.setText(String.valueOf(position));
-        name.setText(data.get(position));
+        text.setText(data.get(position));
         return view;
     }
 }
