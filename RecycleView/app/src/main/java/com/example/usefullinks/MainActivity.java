@@ -1,6 +1,7 @@
 package com.example.usefullinks;
 
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
@@ -40,7 +41,34 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         binding.recycleView.setLayoutManager(layoutManager);
+        MyAdapter adapter = new MyAdapter(people);
 
-        binding.recycleView.setAdapter(new MyAdapter(people));
+        binding.recycleView.setAdapter(adapter);
+
+        binding.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                people.add(new Person("New people", R.drawable.im5));
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        binding.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (people.size() > 0){
+                    people.remove(people.size() - 1);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+        binding.btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                people.clear();
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 }
